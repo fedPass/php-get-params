@@ -7,14 +7,18 @@ $text_original_lower = strtolower($text_original);
 
 //Leggere dal parametro in GET una badword
 $badword = $_GET['badword'];
-echo ('la parola da censurare è: ' . $badword);
-//prendo la badword e lo converto in minuscolo
-$badword_lower = strtolower($badword);
+//se non ho query_string dammi un messaggio di errore
+if (!$badword) {
+    echo 'Inserisci una parola da censurare';
+} else {
+    echo ('la parola da censurare è: ' . $badword);
+    //prendo la badword e lo converto in minuscolo
+    $badword_lower = strtolower($badword);
+    //cercare all'interno del testo la badword e sostituirla con "***"
+    $text_edited = str_replace($badword_lower, '***', $text_original_lower);
 
-//cercare all'interno del testo la badword e sostituirla con "***"
-$text_edited = str_replace($badword_lower, '***', $text_original_lower);
-
-//visualizzare a schermo il paragrafo aggiornato
+    //visualizzare a schermo il paragrafo aggiornato
+}
  ?>
 
  <p><?php echo $text_edited ?></p>
