@@ -5,6 +5,10 @@ echo ('il testo originale è <br>' . $text_original);
 //prendo il testo originale e lo converto tutto in minuscolo
 $text_original_lower = strtolower($text_original);
 
+//calcolo la lunghezza del testo
+$text_lenght = mb_strlen($text_original);
+echo ('La lunghezza del testo è ' . $text_lenght . ' parole.<hr>');
+
 //Leggere dal parametro in GET una badword
 $badword = $_GET['badword'];
 //se non ho query_string dammi un messaggio di errore
@@ -15,7 +19,8 @@ if (!$badword) {
     //prendo la badword e lo converto in minuscolo
     $badword_lower = strtolower($badword);
     //cercare all'interno del testo la badword e sostituirla con "***"
-    $text_edited = str_replace($badword_lower, '***', $text_original_lower);
+    $text_edited = str_replace(' '.$badword_lower.' ', ' *** ', $text_original_lower);
+    //esiste anche str_ireplace --> replace insensibile
 
     //visualizzare a schermo il paragrafo aggiornato
 }
